@@ -29,48 +29,48 @@ The project is designed as a **portfolio demonstration** for Industrial Automati
 ---
 
 ## Setup Instructions
+
 1. **Clone the repo:**
-   ```bash
-   git clone https://github.com/Niru6241/mini-scada-dashboard.git
-   cd mini-scada-dashboard
-Set PostgreSQL password as environment variable
+    
+    ```bash
+    git clone https://github.com/Niru6241/mini-scada-dashboard.git
+    cd mini-scada-dashboard
+    ```
 
-Windows:
+2. **Set PostgreSQL password as environment variable (Windows):**
+    
+    - Press **Win + S**, type `Environment Variables`, select **Edit the system environment variables**  
+    - Click **Environment Variables…**  
+    - Under **User variables**, click **New…**  
+      - Name: `PGPASSWORD`  
+      - Value: your Postgres password  
+    - Click **OK → OK → OK**  
+    - Restart Visual Studio  
 
-Press Win + S → type Environment Variables → Edit the system environment variables
+3. **Update connection string in `Form1.vb`** (if needed):
+    
+    ```vb.net
+    Dim dbPassword As String = Environment.GetEnvironmentVariable("PGPASSWORD")
+    Dim connStr As String = $"Host=localhost;Port=5432;Username=postgres;Password={dbPassword};Database=wellsite_db"
+    ```
 
-Click Environment Variables…
+4. **Open the solution in Visual Studio:**  
+    - `WellSiteDashboard.sln`
 
-Under User variables, click New…
+5. **Build and run:**  
+    - Click **Start** to simulate sensor readings.
 
-Name: PGPASSWORD
+---
 
-Value: your Postgres password
+## Screenshots
 
-Click OK → OK → OK
+### Main Dashboard with Live Chart
+![Main Dashboard](images/good_scenario.png)
 
-Restart Visual Studio
+### High Value Alert / Warning Values
+![High Value Alert](images/warning_cridical_value.png)
 
-Update connection string in Form1.vb (if needed):
+---
 
-vb.net
-Copy
-Edit
-Dim dbPassword As String = Environment.GetEnvironmentVariable("PGPASSWORD")
-Dim connStr As String = $"Host=localhost;Port=5432;Username=postgres;Password={dbPassword};Database=wellsite_db"
-Open the solution in Visual Studio
-
-WellSiteDashboard.sln
-
-Build and run
-
-Click Start to simulate sensor readings.
-
-Screenshots
-Main Dashboard with Live chart
-images/good_scenario.png
-
-High Value Alert/warning values
-images/warning_cridical_value.png
-
-
+## License
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
